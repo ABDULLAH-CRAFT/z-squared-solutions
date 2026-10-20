@@ -1,6 +1,0 @@
-.card {
-  padding: var(--space-5);
-}
-.card.accent {
-  border-left: 4px solid var(--red-600);
-}

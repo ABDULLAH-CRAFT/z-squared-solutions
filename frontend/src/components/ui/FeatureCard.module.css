@@ -1,0 +1,30 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+}
+.wide {
+  grid-column: 1 / -1;
+}
+.icon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid #f3c6cb;
+  border-radius: 50%;
+  background: var(--tint-red);
+  color: var(--red-600);
+}
+.title {
+  margin: 0;
+  font-size: var(--fs-600);
+}
+.body > :last-child {
+  margin-bottom: 0;
+}
+.body p {
+  margin-bottom: var(--space-3);
+}

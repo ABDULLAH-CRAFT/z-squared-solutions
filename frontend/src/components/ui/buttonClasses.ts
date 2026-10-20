@@ -1,9 +1,9 @@
 import styles from './Button.module.css'
 
-export type ButtonVariant = 'primary' | 'secondary'
+export type ButtonVariant = 'primary' | 'secondary' | 'light'
 export type ButtonSize = 'md' | 'sm'
 
-/** Shared by Button and ButtonLink so both render identically. */
+/** Shared by Button, ButtonLink and router <Link>s so every call to action renders identically. */
 export function buttonClasses(
   variant: ButtonVariant,
   size: ButtonSize,

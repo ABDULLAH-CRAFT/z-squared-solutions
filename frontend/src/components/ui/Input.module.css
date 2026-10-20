@@ -18,6 +18,10 @@
   color: var(--navy-800);
   font: 400 var(--fs-400) / 1.4 var(--font-body);
 }
+textarea.input {
+  min-height: 8rem;
+  resize: vertical;
+}
 .input:focus-visible {
   border-color: var(--navy-800);
   box-shadow: var(--shadow-inset), var(--focus-ring);

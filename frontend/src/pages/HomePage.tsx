@@ -1,13 +1,13 @@
+import { HomeBento } from '@/features/home/HomeBento'
 import { Hero } from '@/features/home/Hero'
-import { MarketStrip } from '@/features/home/MarketStrip'
-import { WhoWeAre } from '@/features/home/WhoWeAre'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 export function HomePage() {
+  usePageTitle()
   return (
     <>
       <Hero />
-      <WhoWeAre />
-      <MarketStrip />
+      <HomeBento />
     </>
   )
 }

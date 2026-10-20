@@ -1,15 +1,14 @@
-import type { ModalId } from '@/features/modals/modalTypes'
-
-export interface ModalNavItem {
+export interface NavItem {
   label: string
-  modal: ModalId
+  to: string
 }
 
 /** Order matches the specified navigation: Home, Services, Industries, Our Approach, About Us, Contact. */
-export const modalNavItems: readonly ModalNavItem[] = [
-  { label: 'Services', modal: 'services' },
-  { label: 'Industries', modal: 'industries' },
-  { label: 'Our Approach', modal: 'approach' },
-  { label: 'About Us', modal: 'about' },
-  { label: 'Contact', modal: 'contact' },
+export const navItems: readonly NavItem[] = [
+  { label: 'Home', to: '/' },
+  { label: 'Services', to: '/services' },
+  { label: 'Industries', to: '/industries' },
+  { label: 'Our Approach', to: '/our-approach' },
+  { label: 'About Us', to: '/about' },
+  { label: 'Contact', to: '/contact' },
 ]

@@ -1,17 +1,18 @@
 import { Menu, X } from 'lucide-react'
 import { useEffect, useId, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { Logo } from '@/components/brand/Logo'
-import { Button } from '@/components/ui/Button'
-import { modalNavItems } from '@/config/navigation'
-import type { ModalId } from '@/features/modals/modalTypes'
-import { useModal } from '@/features/modals/useModal'
+import { buttonClasses } from '@/components/ui/buttonClasses'
+import { navItems } from '@/config/navigation'
 import styles from './Header.module.css'
 
-const DESKTOP_QUERY = '(min-width: 900px)'
+const DESKTOP_QUERY = '(min-width: 1100px)'
+
+function linkClass({ isActive }: { isActive: boolean }, base: string, active: string): string {
+  return isActive ? `${base} ${active}` : base
+}
 
 export function Header() {
-  const { openModal } = useModal()
   const [menuOpen, setMenuOpen] = useState(false)
   const toggleRef = useRef<HTMLButtonElement>(null)
   const panelId = useId()
@@ -43,59 +44,36 @@ export function Header() {
     }
   }, [])
 
-  function goHome() {
+  function closeMenu() {
     setMenuOpen(false)
-    window.scrollTo(0, 0)
   }
-
-  function openFromMenu(id: ModalId) {
-    // Focus the toggle first so focus returns somewhere visible when the modal closes.
-    toggleRef.current?.focus()
-    setMenuOpen(false)
-    openModal(id)
-  }
-
-  const sectionItems = modalNavItems.filter((item) => item.modal !== 'contact')
 
   return (
     <header className={styles.header}>
       <div className={`container ${styles.bar}`}>
-        <Link to="/" className={styles.brand} onClick={goHome} aria-label="Z Squared Solutions home">
+        <Link to="/" className={styles.brand} onClick={closeMenu} aria-label="Z Squared Solutions home">
           <Logo />
         </Link>
 
         <nav className={styles.desktopNav} aria-label="Primary">
-          <ul className={styles.navList}>
-            <li>
-              <Link to="/" className={styles.navLink} onClick={goHome}>
-                Home
-              </Link>
-            </li>
-            {sectionItems.map((item) => (
-              <li key={item.modal}>
-                <button
-                  type="button"
-                  className={styles.navLink}
-                  onClick={() => {
-                    openModal(item.modal)
-                  }}
+          <ul className={styles.pill}>
+            {navItems.map((item) => (
+              <li key={item.to}>
+                <NavLink
+                  to={item.to}
+                  end={item.to === '/'}
+                  className={(state) => linkClass(state, styles.navLink ?? '', styles.active ?? '')}
                 >
                   {item.label}
-                </button>
+                </NavLink>
               </li>
             ))}
-            <li>
-              <Button
-                size="sm"
-                onClick={() => {
-                  openModal('contact')
-                }}
-              >
-                Contact
-              </Button>
-            </li>
           </ul>
         </nav>
+
+        <Link to="/contact" className={`${buttonClasses('primary', 'sm')} ${styles.cta}`}>
+          Let&apos;s Connect
+        </Link>
 
         <button
           ref={toggleRef}
@@ -115,35 +93,20 @@ export function Header() {
       <div id={panelId} className={styles.mobilePanel} hidden={!menuOpen}>
         <nav aria-label="Mobile">
           <ul className={styles.mobileList}>
-            <li>
-              <Link to="/" className={styles.mobileLink} onClick={goHome}>
-                Home
-              </Link>
-            </li>
-            {sectionItems.map((item) => (
-              <li key={item.modal}>
-                <button
-                  type="button"
-                  className={styles.mobileLink}
-                  onClick={() => {
-                    openFromMenu(item.modal)
-                  }}
+            {navItems.map((item) => (
+              <li key={item.to}>
+                <NavLink
+                  to={item.to}
+                  end={item.to === '/'}
+                  onClick={closeMenu}
+                  className={(state) =>
+                    linkClass(state, styles.mobileLink ?? '', styles.mobileActive ?? '')
+                  }
                 >
                   {item.label}
-                </button>
+                </NavLink>
               </li>
             ))}
-            <li>
-              <button
-                type="button"
-                className={`${styles.mobileLink} ${styles.mobilePrimary}`}
-                onClick={() => {
-                  openFromMenu('contact')
-                }}
-              >
-                Contact
-              </button>
-            </li>
           </ul>
         </nav>
       </div>

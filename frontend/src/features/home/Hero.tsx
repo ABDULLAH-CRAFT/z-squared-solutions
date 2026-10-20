@@ -1,11 +1,9 @@
+import { Link } from 'react-router-dom'
 import { Badge } from '@/components/ui/Badge'
-import { Button } from '@/components/ui/Button'
-import { useModal } from '@/features/modals/useModal'
+import { buttonClasses } from '@/components/ui/buttonClasses'
 import styles from './Hero.module.css'
 
 export function Hero() {
-  const { openModal } = useModal()
-
   return (
     <section className={styles.hero} aria-labelledby="hero-heading">
       <div className={`${styles.shape} ${styles.shapeNavy}`} aria-hidden="true" />
@@ -22,21 +20,12 @@ export function Hero() {
             businesses reach the right decision makers and unlock new opportunities.
           </p>
           <div className={styles.actions}>
-            <Button
-              onClick={() => {
-                openModal('contact')
-              }}
-            >
-              Let's Connect
-            </Button>
-            <Button
-              variant="secondary"
-              onClick={() => {
-                openModal('services')
-              }}
-            >
+            <Link to="/contact" className={buttonClasses('primary', 'md')}>
+              Let&apos;s Connect
+            </Link>
+            <Link to="/services" className={buttonClasses('secondary', 'md')}>
               Explore Services
-            </Button>
+            </Link>
           </div>
         </div>
       </div>

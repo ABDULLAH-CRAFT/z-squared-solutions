@@ -6,6 +6,13 @@ export const site = {
   domain: 'www.z2solution.com',
   /** Markets the outreach targets. These are not office locations. */
   markets: ['United States', 'United Kingdom', 'Australia', 'Dubai & UAE'],
+  services: [
+    'SaaS Lead Generation',
+    'IT Staffing Business Development',
+    'Healthcare Staffing Business Development',
+    'Microsoft Solutions Lead Generation',
+    'Outbound Sales Development',
+  ],
 } as const
 
 /** Mirrors the breakpoints documented in src/styles/tokens.css (CSS variables cannot be used in media queries). */

@@ -1,11 +1,10 @@
+import { Link } from 'react-router-dom'
 import { Logo } from '@/components/brand/Logo'
-import { modalNavItems } from '@/config/navigation'
+import { navItems } from '@/config/navigation'
 import { site } from '@/config/site'
-import { useModal } from '@/features/modals/useModal'
 import styles from './Footer.module.css'
 
 export function Footer() {
-  const { openModal } = useModal()
   const year = new Date().getFullYear()
 
   return (
@@ -20,17 +19,11 @@ export function Footer() {
           <nav aria-label="Footer">
             <h2 className={styles.heading}>Explore</h2>
             <ul className={styles.list}>
-              {modalNavItems.map((item) => (
-                <li key={item.modal}>
-                  <button
-                    type="button"
-                    className={styles.linkButton}
-                    onClick={() => {
-                      openModal(item.modal)
-                    }}
-                  >
+              {navItems.map((item) => (
+                <li key={item.to}>
+                  <Link className={styles.link} to={item.to}>
                     {item.label}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
