@@ -1,0 +1,17 @@
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--red-600);
+  border-left-width: 4px;
+  border-radius: var(--radius-md);
+  background: #fff5f6;
+}
+.message {
+  margin: 0;
+  color: var(--red-700);
+  font-weight: 600;
+}

@@ -1,0 +1,74 @@
+/*
+ * Design tokens. See docs/DESIGN_SPEC.md.
+ * Breakpoints (use literal values in @media): sm 480px, md 768px, lg 1024px, xl 1440px.
+ */
+:root {
+  /* Brand */
+  --navy-900: #081746;
+  --navy-800: #0b1f5c;
+  --navy-600: #31457f;
+  --navy-300: #8a97bd;
+  --red-600: #d62839; /* 4.98:1 on white: safe for text and white-on-red buttons */
+  --red-700: #b81f2f;
+  --white: #ffffff;
+
+  /* Surfaces (predominantly white, with a faint cool tint for neumorphic depth) */
+  --surface-page: #ffffff;
+  --surface-raised: #f6f8fd;
+  --surface-sunken: #eef1f9;
+  --border-fine: #dbe1f0;
+  --border-strong: var(--navy-800);
+
+  /* Text */
+  --text-heading: var(--navy-800);
+  --text-body: var(--navy-600);
+  --text-on-dark: var(--white);
+
+  /* Typography (system stacks: no font downloads, no layout shift) */
+  --font-display: Georgia, 'Times New Roman', 'Noto Serif', serif;
+  --font-body: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --fs-300: 0.875rem;
+  --fs-400: 1rem;
+  --fs-500: 1.125rem;
+  --fs-600: 1.375rem;
+  --fs-700: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem);
+  --fs-800: clamp(2.5rem, 1.6rem + 3.8vw, 4.75rem);
+  --lh-tight: 1.1;
+  --lh-body: 1.65;
+
+  /* Spacing (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 5rem;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  /* Neumorphic shadows: soft dark plus light highlight pair */
+  --shadow-dark: rgba(11, 31, 92, 0.14);
+  --shadow-light: rgba(255, 255, 255, 0.95);
+  --shadow-raised: 6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
+  --shadow-raised-sm: 3px 3px 8px var(--shadow-dark), -3px -3px 8px var(--shadow-light);
+  --shadow-inset: inset 3px 3px 7px var(--shadow-dark), inset -3px -3px 7px var(--shadow-light);
+  --gradient-raised: linear-gradient(145deg, #ffffff, var(--surface-raised));
+
+  /* Focus */
+  --focus-ring: 0 0 0 3px #ffffff, 0 0 0 5px var(--navy-800);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+
+  /* Layout */
+  --container-max: 1120px;
+  --container-pad: clamp(1rem, 4vw, 2rem);
+}

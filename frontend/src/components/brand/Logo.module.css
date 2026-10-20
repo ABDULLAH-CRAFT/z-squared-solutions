@@ -1,0 +1,41 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--navy-800);
+}
+.mark {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: none;
+}
+.z,
+.two {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+.z {
+  font-size: 38px;
+  fill: var(--white);
+}
+.two {
+  font-size: 20px;
+  fill: var(--red-600);
+}
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-500);
+  color: var(--text-heading);
+}
+
+/* Light tone for navy backgrounds: white tile, navy Z, red 2, white wordmark */
+.light {
+  color: var(--white);
+}
+.light .z {
+  fill: var(--navy-800);
+}
+.light .wordmark {
+  color: var(--white);
+}

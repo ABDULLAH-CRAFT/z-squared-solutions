@@ -1,0 +1,21 @@
+/* Reusable neumorphic primitives. Every surface keeps a fine border so boundaries stay visible. */
+.nm-raised {
+  background: var(--gradient-raised);
+  border: 1px solid var(--border-fine);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-raised);
+}
+
+.nm-raised-sm {
+  background: var(--gradient-raised);
+  border: 1px solid var(--border-fine);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-raised-sm);
+}
+
+.nm-inset {
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-fine);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-inset);
+}

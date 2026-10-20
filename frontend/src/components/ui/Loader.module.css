@@ -1,0 +1,7 @@
+.loader {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--navy-800);
+  font-weight: 600;
+}
