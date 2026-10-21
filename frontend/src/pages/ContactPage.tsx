@@ -3,7 +3,7 @@ import { PageHero } from '@/components/layout/PageHero'
 import { Section } from '@/components/layout/Section'
 import { ButtonLink } from '@/components/ui/ButtonLink'
 import { site } from '@/config/site'
-import { ContactForm } from '@/features/contact/ContactForm'
+import { ContactForm } from '@/features/contact/ContactForm.tsx'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import styles from '@/features/contact/ContactPage.module.css'
 
