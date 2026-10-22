@@ -1,0 +1,36 @@
+.graphic {
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+/* Full turn every two minutes: slow enough to feel alive without distracting */
+.spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: network-spin 120s linear infinite;
+}
+
+.pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: network-pulse 3.5s ease-in-out infinite;
+}
+
+@keyframes network-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes network-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.45;
+  }
+}

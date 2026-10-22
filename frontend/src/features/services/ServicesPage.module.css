@@ -1,6 +1,63 @@
 .accent {
   color: var(--red-600);
 }
+
+/* Featured service: dark navy panel with an abstract pipeline graphic */
+.featured {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: var(--space-6);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  overflow: clip;
+  border-radius: var(--radius-xl);
+  background: var(--gradient-navy);
+  color: rgba(255, 255, 255, 0.9);
+}
+.eyebrowLight {
+  margin: 0 0 var(--space-3);
+  color: #ffb3bb;
+  font-size: var(--fs-300);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.featuredTitle {
+  margin: 0 0 var(--space-4);
+  color: var(--white);
+  font-size: var(--fs-700);
+}
+.featuredCopy p {
+  max-width: 34rem;
+}
+.featuredCopy p:last-of-type {
+  margin-bottom: var(--space-5);
+}
+.featuredCta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.featuredVisual {
+  max-width: 26rem;
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* Remaining services: clean grid */
+.gridTitle {
+  margin: 0 0 var(--space-5);
+  font-size: var(--fs-700);
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .activities {
   display: grid;
   gap: var(--space-3);
@@ -13,4 +70,16 @@
 .activitiesTitle {
   margin: 0;
   font-size: var(--fs-700);
+}
+
+@media (min-width: 900px) {
+  .featured {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: var(--space-7);
+  }
+}
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }

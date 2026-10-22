@@ -145,7 +145,7 @@ export function Header() {
       >
         <nav aria-label="Mobile navigation">
           <ul className={styles.mobileList}>
-            {navItems.map((item, index) => (
+            {navItems.map((item) => (
               <li key={item.to}>
                 <NavLink
                   to={item.to}
@@ -159,9 +159,6 @@ export function Header() {
                     )
                   }
                 >
-                  <span className={styles.mobileNumber}>
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
                   <span>{item.label}</span>
                   <ArrowUpRight
                     className={styles.mobileArrow}

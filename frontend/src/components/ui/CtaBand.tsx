@@ -7,17 +7,21 @@ interface CtaBandProps {
   text: string
   buttonLabel?: string
   to?: string
+  /** Red is the default so the band stands out from the navy and white sections around it. */
+  variant?: 'red' | 'navy'
 }
 
-/** Closing call to action shown at the bottom of inner pages. */
+/** Closing call to action: a short message and one clear action. */
 export function CtaBand({
   title,
   text,
   buttonLabel = "Let's Connect",
   to = '/contact',
+  variant = 'red',
 }: CtaBandProps) {
+  const classes = [styles.band, variant === 'navy' ? styles.navy : styles.red].join(' ')
   return (
-    <section className={styles.band} aria-labelledby="cta-heading">
+    <section className={classes} aria-labelledby="cta-heading">
       <div className={styles.glow} aria-hidden="true" />
       <div className={styles.copy}>
         <h2 id="cta-heading" className={styles.title}>

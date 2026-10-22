@@ -1,16 +1,12 @@
-import {
-  Briefcase,
-  Cloud,
-  HeartPulse,
-  LayoutGrid,
-  Send,
-} from 'lucide-react'
+import { ArrowRight, Briefcase, HeartPulse, LayoutGrid, Send } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { PageHero } from '@/components/layout/PageHero'
 import { Section } from '@/components/layout/Section'
-import { CardGrid } from '@/components/ui/CardGrid'
+import { buttonClasses } from '@/components/ui/buttonClasses'
 import { ChipList } from '@/components/ui/ChipList'
 import { CtaBand } from '@/components/ui/CtaBand'
-import { FeatureCard } from '@/components/ui/FeatureCard'
+import { PipelineGraphic } from '@/features/services/PipelineGraphic'
+import { ServiceTile } from '@/features/services/ServiceTile'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import styles from '@/features/services/ServicesPage.module.css'
 
@@ -55,45 +51,61 @@ export function ServicesPage() {
       />
 
       <Section>
-        <CardGrid label="Services">
-          <FeatureCard icon={Cloud} title="SaaS Lead Generation">
+        <article className={styles.featured} aria-labelledby="featured-service-heading">
+          <div className={styles.featuredCopy}>
+            <p className={styles.eyebrowLight}>Featured service</p>
+            <h2 id="featured-service-heading" className={styles.featuredTitle}>
+              SaaS Lead Generation
+            </h2>
             <p>
               We research your ideal customers, identify the decision makers who buy software like
               yours, and open conversations through targeted outreach.
             </p>
             <p>Your sales team then meets prospects who have shown genuine interest.</p>
-          </FeatureCard>
+            <Link to="/contact" className={buttonClasses('light', 'md', styles.featuredCta)}>
+              Discuss this service
+              <ArrowRight size={18} aria-hidden="true" />
+            </Link>
+          </div>
+          <div className={styles.featuredVisual} aria-hidden="true">
+            <PipelineGraphic />
+          </div>
+        </article>
+      </Section>
 
-          <FeatureCard icon={Briefcase} title="IT Staffing Business Development">
+      <Section>
+        <h2 className={styles.gridTitle}>More ways we can support your pipeline</h2>
+        <ul className={styles.grid} aria-label="More services">
+          <ServiceTile icon={Briefcase} title="IT Staffing Business Development">
             <p>
               Business development support for IT staffing and recruitment firms: identifying
               companies that hire technology talent, reaching their hiring decision makers and
               starting client conversations.
             </p>
-          </FeatureCard>
+          </ServiceTile>
 
-          <FeatureCard icon={HeartPulse} title="Healthcare Staffing Business Development">
+          <ServiceTile icon={HeartPulse} title="Healthcare Staffing Business Development">
             <p>
               Targeted prospecting and follow-up for healthcare staffing companies, helping you
               reach the right contacts at healthcare employers and organisations.
             </p>
-          </FeatureCard>
+          </ServiceTile>
 
-          <FeatureCard icon={Send} title="Outbound Sales Development">
+          <ServiceTile icon={Send} title="Outbound Sales Development">
             <p>
               An outbound programme run as an extension of your sales team: targeted email and
               LinkedIn outreach, qualification, appointment setting and follow-up coordination.
             </p>
-          </FeatureCard>
+          </ServiceTile>
 
-          <FeatureCard icon={LayoutGrid} title="Microsoft Solutions Lead Generation" wide>
+          <ServiceTile icon={LayoutGrid} title="Microsoft Solutions Lead Generation" wide>
             <p>
               Pipeline development for Microsoft Solutions Partners and business technology
               providers, across the Microsoft solution areas below.
             </p>
             <ChipList items={microsoftSolutions} label="Microsoft solution areas" />
-          </FeatureCard>
-        </CardGrid>
+          </ServiceTile>
+        </ul>
       </Section>
 
       <Section>

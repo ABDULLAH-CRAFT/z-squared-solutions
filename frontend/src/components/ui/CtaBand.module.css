@@ -5,11 +5,17 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-5);
-  padding: clamp(1.5rem, 4vw, 2.75rem);
+  padding: clamp(1.75rem, 5vw, 3.25rem);
   overflow: clip;
   border-radius: var(--radius-xl);
+  color: var(--white);
+}
+.red {
+  background: linear-gradient(145deg, var(--red-600), var(--red-700));
+}
+.navy {
   background: var(--gradient-navy);
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.92);
 }
 .glow {
   position: absolute;
@@ -18,8 +24,13 @@
   width: 18rem;
   height: 18rem;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(214, 40, 57, 0.5), transparent 68%);
   pointer-events: none;
+}
+.red .glow {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.16), transparent 68%);
+}
+.navy .glow {
+  background: radial-gradient(circle, rgba(214, 40, 57, 0.5), transparent 68%);
 }
 .copy {
   position: relative;
@@ -32,6 +43,7 @@
 }
 .text {
   margin: 0;
+  font-size: var(--fs-500);
 }
 .button {
   position: relative;

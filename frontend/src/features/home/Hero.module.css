@@ -1,53 +1,125 @@
 .hero {
   position: relative;
   overflow: clip;
-  padding-block: clamp(3rem, 8vw, 6rem) var(--space-7);
+  background: var(--gradient-navy);
+  color: rgba(255, 255, 255, 0.88);
+  padding-block: clamp(3.5rem, 9vw, 7rem);
 }
-.shape {
+
+/*
+ * Optional photograph. To use one, save it as frontend/public/images/hero.jpg
+ * and uncomment the next line inside .hero:
+ *   --hero-photo: url('/images/hero.jpg');
+ * The navy overlay below keeps the text readable over any image.
+ */
+.photo {
   position: absolute;
-  z-index: 0;
-  border-radius: 50%;
-  pointer-events: none;
+  inset: 0;
+  background-image: var(--hero-photo, none);
+  background-position: center;
+  background-size: cover;
+  opacity: 0.45;
 }
-.shapeNavy {
-  top: -9rem;
-  left: -8rem;
-  width: 24rem;
-  height: 24rem;
-  background: radial-gradient(circle at 35% 35%, rgba(11, 31, 92, 0.11), transparent 70%);
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(8, 23, 70, 0.94) 0%,
+    rgba(8, 23, 70, 0.78) 55%,
+    rgba(11, 31, 92, 0.55) 100%
+  );
 }
-.shapeRed {
-  top: -2rem;
-  right: -6rem;
-  width: 18rem;
-  height: 18rem;
-  background: radial-gradient(circle at 40% 40%, rgba(214, 40, 57, 0.13), transparent 70%);
-}
-.content {
+
+.inner {
   position: relative;
   z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: var(--space-7);
+}
+.content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  max-width: 54rem;
-  margin-inline: auto;
-  text-align: center;
+  align-items: flex-start;
+  max-width: 40rem;
 }
 .headline {
   margin: var(--space-5) 0 var(--space-4);
+  color: var(--white);
   font-size: var(--fs-800);
 }
 .accent {
-  color: var(--red-600);
+  color: #ff8a95;
 }
 .lead {
-  max-width: 40rem;
+  max-width: 36rem;
   margin: 0 0 var(--space-6);
+  color: rgba(255, 255, 255, 0.88);
   font-size: var(--fs-500);
 }
 .actions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: var(--space-4);
+}
+/* Remove the neumorphic white highlight, which looks like a glow on navy */
+.actions > :first-child:not(:focus-visible) {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+}
+
+/* Network graphic: desktop and tablet only, so the mobile hero stays short. */
+.visual {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .inner {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+  .visual {
+    display: block;
+    opacity: 0.9;
+  }
+  /* Live wallpaper: two soft glows drifting slowly behind the content */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+.orbRed {
+  top: -10rem;
+  right: -8rem;
+  width: 32rem;
+  height: 32rem;
+  background: radial-gradient(circle, rgba(214, 40, 57, 0.32), transparent 65%);
+  animation: drift-red 18s ease-in-out infinite alternate;
+}
+.orbBlue {
+  bottom: -14rem;
+  left: -10rem;
+  width: 36rem;
+  height: 36rem;
+  background: radial-gradient(circle, rgba(74, 108, 214, 0.35), transparent 65%);
+  animation: drift-blue 22s ease-in-out infinite alternate;
+}
+
+@keyframes drift-red {
+  to {
+    transform: translate(-4rem, 5rem) scale(1.15);
+  }
+}
+@keyframes drift-blue {
+  to {
+    transform: translate(6rem, -4rem) scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb {
+    animation: none;
+  }
+}
 }
