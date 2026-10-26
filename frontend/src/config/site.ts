@@ -2,10 +2,10 @@
 export const site = {
   name: 'Z Squared Solutions',
   tagline: 'Powering Your Next Stage of Growth.',
-  email: 'zubair@z2solution.com',
+  email: 'info@z2solution.com',
   domain: 'www.z2solution.com',
   /** Markets the outreach targets. These are not office locations. */
-  markets: ['United States', 'United Kingdom', 'Australia', 'Dubai & UAE'],
+  markets: ['United States', 'United Kingdom', 'Australia', 'UAE'],
   services: [
     'SaaS Lead Generation',
     'IT Staffing Business Development',
