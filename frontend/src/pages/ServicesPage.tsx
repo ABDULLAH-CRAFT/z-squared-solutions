@@ -1,4 +1,5 @@
-import { ArrowRight, Briefcase, HeartPulse, LayoutGrid, Send } from 'lucide-react'
+import { ArrowRight, Briefcase, Check, HeartPulse, LayoutGrid, Send } from 'lucide-react'
+import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { PageHero } from '@/components/layout/PageHero'
 import { Section } from '@/components/layout/Section'
@@ -44,16 +45,21 @@ export function ServicesPage() {
         eyebrow="Services"
         title={
           <>
-            Lead generation and sales development, <span className={styles.accent}>built around you.</span>
+            Lead generation and sales development, <span className="gradient-text">built around you.</span>
           </>
         }
         lead="Five focused services that help ambitious businesses reach the right decision makers and open qualified sales conversations."
       />
 
       <Section>
-        <article className={styles.featured} aria-labelledby="featured-service-heading">
+        <article
+          className={styles.featured}
+          aria-labelledby="featured-service-heading"
+          data-reveal
+        >
+          <div className={`orb orb-red ${styles.featuredGlow}`} aria-hidden="true" />
           <div className={styles.featuredCopy}>
-            <p className={styles.eyebrowLight}>Featured service</p>
+            <p className="eyebrow eyebrow-light">Featured service</p>
             <h2 id="featured-service-heading" className={styles.featuredTitle}>
               SaaS Lead Generation
             </h2>
@@ -74,9 +80,11 @@ export function ServicesPage() {
       </Section>
 
       <Section>
-        <h2 className={styles.gridTitle}>More ways we can support your pipeline</h2>
+        <h2 className={styles.gridTitle} data-reveal>
+          More ways we can support your <span className="accent-text">pipeline</span>
+        </h2>
         <ul className={styles.grid} aria-label="More services">
-          <ServiceTile icon={Briefcase} title="IT Staffing Business Development">
+          <ServiceTile icon={Briefcase} title="IT Staffing Business Development" index={0}>
             <p>
               Business development support for IT staffing and recruitment firms: identifying
               companies that hire technology talent, reaching their hiring decision makers and
@@ -84,21 +92,21 @@ export function ServicesPage() {
             </p>
           </ServiceTile>
 
-          <ServiceTile icon={HeartPulse} title="Healthcare Staffing Business Development">
+          <ServiceTile icon={HeartPulse} title="Healthcare Staffing Business Development" index={1}>
             <p>
               Targeted prospecting and follow-up for healthcare staffing companies, helping you
               reach the right contacts at healthcare employers and organisations.
             </p>
           </ServiceTile>
 
-          <ServiceTile icon={Send} title="Outbound Sales Development">
+          <ServiceTile icon={Send} title="Outbound Sales Development" index={2}>
             <p>
               An outbound programme run as an extension of your sales team: targeted email and
               LinkedIn outreach, qualification, appointment setting and follow-up coordination.
             </p>
           </ServiceTile>
 
-          <ServiceTile icon={LayoutGrid} title="Microsoft Solutions Lead Generation" wide>
+          <ServiceTile icon={LayoutGrid} title="Microsoft Solutions Lead Generation" wide index={0}>
             <p>
               Pipeline development for Microsoft Solutions Partners and business technology
               providers, across the Microsoft solution areas below.
@@ -109,12 +117,26 @@ export function ServicesPage() {
       </Section>
 
       <Section>
-        <div className={`nm-raised ${styles.activities}`}>
+        <div className={`nm-raised ${styles.activities}`} data-reveal>
           <h2 className={styles.activitiesTitle}>What every engagement can include</h2>
           <p>
             The exact scope, channels and indicators are agreed with each client before work begins.
           </p>
-          <ChipList items={activities} label="Typical activities" />
+          <ul className={styles.activityList} aria-label="Typical activities">
+            {activities.map((activity, index) => (
+              <li
+                key={activity}
+                className={styles.activity}
+                data-reveal
+                style={{ '--reveal-delay': `${(index % 3) * 80}ms` } as CSSProperties}
+              >
+                <span className={styles.activityIcon} aria-hidden="true">
+                  <Check size={16} />
+                </span>
+                {activity}
+              </li>
+            ))}
+          </ul>
         </div>
       </Section>
 

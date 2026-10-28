@@ -1,3 +1,4 @@
+import { ArrowUp } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Logo } from '@/components/brand/Logo'
 import { navItems } from '@/config/navigation'
@@ -9,11 +10,20 @@ export function Footer() {
 
   return (
     <footer className={styles.footer}>
-      <div className="container">
+      <div className="bg-grid" aria-hidden="true" />
+      <div className={`orb orb-red ${styles.orb}`} aria-hidden="true" />
+      <span className={styles.watermark} aria-hidden="true">
+        Z<sup>2</sup>
+      </span>
+
+      <div className={`container ${styles.inner}`}>
         <div className={styles.grid}>
-          <div>
+          <div className={styles.brandCol}>
             <Logo tone="light" />
             <p className={styles.tagline}>{site.tagline}</p>
+            <a className={styles.mailPill} href={`mailto:${site.email}`}>
+              {site.email}
+            </a>
           </div>
 
           <nav aria-label="Footer">
@@ -30,10 +40,16 @@ export function Footer() {
           </nav>
 
           <div>
-            <h2 className={styles.heading}>Contact</h2>
-            <a className={styles.mail} href={`mailto:${site.email}`}>
-              {site.email}
-            </a>
+            <h2 className={styles.heading}>Services</h2>
+            <ul className={styles.list}>
+              {site.services.map((service) => (
+                <li key={service}>
+                  <Link className={styles.link} to="/services">
+                    {service}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div>
@@ -54,6 +70,14 @@ export function Footer() {
             <span className={styles.dot} aria-hidden="true" />
             MSME Registered
           </p>
+          <button
+            type="button"
+            className={styles.top}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            Back to top
+            <ArrowUp size={16} aria-hidden="true" />
+          </button>
         </div>
       </div>
     </footer>

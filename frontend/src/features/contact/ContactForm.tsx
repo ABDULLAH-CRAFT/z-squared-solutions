@@ -1,4 +1,5 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { Send } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
@@ -104,7 +105,10 @@ export function ContactForm() {
         error={errors.message}
       />
 
-      <Button type="submit">Prepare my enquiry</Button>
+      <Button type="submit" size="lg" className={styles.submit}>
+        Prepare my enquiry
+        <Send size={18} aria-hidden="true" />
+      </Button>
 
       <div className={styles.status} role="status" aria-live="polite">
         {mailtoUrl ? (

@@ -19,3 +19,47 @@
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-inset);
 }
+
+/* Glass surface for navy backgrounds */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/*
+ * Cursor spotlight. Add the class and onPointerMove={trackPointer} (see lib/pointer.ts).
+ * The glow follows the pointer through --mx and --my.
+ */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    380px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(214, 40, 57, 0.1),
+    transparent 60%
+  );
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+.spotlight-dark::before {
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.14),
+    transparent 60%
+  );
+}

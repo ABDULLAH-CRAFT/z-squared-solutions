@@ -1,4 +1,7 @@
 import { Globe, Handshake, Search, type LucideIcon } from 'lucide-react'
+import type { CSSProperties } from 'react'
+import { SectionHeading } from '@/components/layout/SectionHeading'
+import { trackPointer } from '@/lib/pointer'
 import styles from './HomeBento.module.css'
 
 interface Pillar {
@@ -29,41 +32,54 @@ const pillars: readonly Pillar[] = [
   },
 ]
 
-/** "Who We Are": a plain white, two-column section. The page's visual rhythm starts here. */
+/** "Who We Are": an intro statement beside three principle cards. */
 export function HomeBento() {
   return (
-    <section className={styles.section} aria-labelledby="who-we-are-heading">
+    <section id="home-intro" className={styles.section} aria-labelledby="who-we-are-heading">
       <div className="container">
         <div className={styles.layout}>
           <div className={styles.intro}>
-            <p className={styles.eyebrow}>Who We Are</p>
-            <h2 id="who-we-are-heading" className={styles.heading}>
-              Growth is never accidental. It is researched, targeted and earned.
-            </h2>
-            <p>
-              Z Squared Solutions is a B2B growth partner for technology, SaaS, Microsoft
-              solutions, IT staffing and healthcare staffing businesses. We believe an effective
-              pipeline starts with understanding your ideal buyer, not with maximizing volume.
-            </p>
-            <p className={styles.last}>
-              We act as an extension of your sales team: researching markets, identifying the right
-              decision makers and opening conversations, so your people can focus on meaningful
-              sales discussions.
-            </p>
+            <SectionHeading
+              id="who-we-are-heading"
+              eyebrow="Who We Are"
+              title={
+                <>
+                  Growth is never accidental. It is <span className="accent-text">researched, targeted and earned.</span>
+                </>
+              }
+            />
+            <div data-reveal style={{ '--reveal-delay': '100ms' } as CSSProperties}>
+              <p>
+                Z Squared Solutions is a B2B growth partner for technology, SaaS, Microsoft
+                solutions, IT staffing and healthcare staffing businesses. We believe an effective
+                pipeline starts with understanding your ideal buyer, not with maximizing volume.
+              </p>
+              <p className={styles.last}>
+                We act as an extension of your sales team: researching markets, identifying the
+                right decision makers and opening conversations, so your people can focus on
+                meaningful sales discussions.
+              </p>
+            </div>
           </div>
 
           <ol className={styles.pillars} aria-label="What guides our work">
-            {pillars.map(({ number, title, text, Icon }) => (
-              <li key={title} className={styles.pillar}>
+            {pillars.map(({ number, title, text, Icon }, index) => (
+              <li
+                key={title}
+                className={`nm-raised spotlight ${styles.pillar}`}
+                data-reveal="right"
+                style={{ '--reveal-delay': `${index * 120}ms` } as CSSProperties}
+                onPointerMove={trackPointer}
+              >
                 <span className={styles.number} aria-hidden="true">
                   {number}
                 </span>
-                <div>
-                  <div className={styles.pillarHead}>
-                    <h3 className={styles.pillarTitle}>{title}</h3>
+                <div className={styles.body}>
+                  <div className={styles.head}>
                     <span className={styles.iconWrap} aria-hidden="true">
-                      <Icon size={18} />
+                      <Icon size={20} />
                     </span>
+                    <h3 className={styles.title}>{title}</h3>
                   </div>
                   <p className={styles.last}>{text}</p>
                 </div>

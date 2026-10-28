@@ -1,57 +1,72 @@
-.band {
-  margin-block: var(--space-6);
-  padding-block: clamp(2.5rem, 6vw, 4.5rem);
-  background: var(--gradient-navy);
-  color: rgba(255, 255, 255, 0.9);
+.section {
+  padding-block: clamp(2.5rem, 6vw, var(--space-8));
 }
-.inner {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  align-items: center;
 }
-.eyebrow {
-  margin: 0 0 var(--space-3);
-  color: #ffb3bb;
-  font-size: var(--fs-300);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.heading {
-  max-width: 32rem;
-  margin: 0 0 var(--space-3);
-  color: var(--white);
-  font-size: var(--fs-700);
-}
-.note {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.88);
+.layout > div:first-child {
+  margin-bottom: 0;
 }
 .list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.pill {
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-pill);
-  background: var(--white);
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 9.5rem;
+  padding: var(--space-5);
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    opacity var(--duration-slow) var(--ease-out);
+}
+.tile:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-raised), var(--shadow-lift);
+}
+.code {
   color: var(--navy-800);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.2rem + 2.5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.name {
+  margin-top: var(--space-2);
+  color: var(--navy-600);
+  font-weight: 600;
+}
+.globe {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  color: var(--red-600);
+  opacity: 0.18;
+  transition:
+    transform 900ms var(--ease-out),
+    opacity var(--duration-base) var(--ease-out);
+}
+.tile:hover .globe {
+  transform: rotate(60deg) scale(1.15);
+  opacity: 0.4;
 }
 
 @media (min-width: 1024px) {
-  .inner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  .layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--space-8);
-  }
-  .list {
-    justify-content: flex-end;
-    max-width: 28rem;
   }
 }

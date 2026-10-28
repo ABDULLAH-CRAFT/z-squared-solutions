@@ -1,34 +1,35 @@
 .hero {
   position: relative;
   overflow: clip;
-  background: var(--gradient-navy);
-  color: rgba(255, 255, 255, 0.88);
-  padding-block: clamp(3.5rem, 9vw, 7rem);
+  min-height: min(100svh, 62rem);
+  display: flex;
+  align-items: center;
+  padding-block: clamp(8rem, 14vw, 10rem) clamp(5rem, 9vw, 7rem);
+  background: var(--gradient-navy-deep);
+  border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+  color: var(--text-on-dark-muted);
 }
-
-/*
- * Optional photograph. To use one, save it as frontend/public/images/hero.jpg
- * and uncomment the next line inside .hero:
- *   --hero-photo: url('/images/hero.jpg');
- * The navy overlay below keeps the text readable over any image.
- */
-.photo {
+.glow {
   position: absolute;
   inset: 0;
-  background-image: var(--hero-photo, none);
-  background-position: center;
-  background-size: cover;
-  opacity: 0.45;
-}
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    100deg,
-    rgba(8, 23, 70, 0.94) 0%,
-    rgba(8, 23, 70, 0.78) 55%,
-    rgba(11, 31, 92, 0.55) 100%
+  pointer-events: none;
+  background: radial-gradient(
+    600px circle at var(--mx, 70%) var(--my, 30%),
+    rgba(255, 255, 255, 0.1),
+    transparent 60%
   );
+}
+.orbRed {
+  top: -12rem;
+  right: -8rem;
+  width: 36rem;
+  height: 36rem;
+}
+.orbBlue {
+  bottom: -16rem;
+  left: -10rem;
+  width: 40rem;
+  height: 40rem;
 }
 
 .inner {
@@ -43,20 +44,33 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 40rem;
 }
+
+/* Staggered page-load entrance */
+.enter {
+  animation: hero-enter 900ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 110ms + 100ms);
+}
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .headline {
-  margin: var(--space-5) 0 var(--space-4);
+  margin: var(--space-5) 0 var(--space-5);
   color: var(--white);
   font-size: var(--fs-800);
-}
-.accent {
-  color: #ff8a95;
+  line-height: 1.04;
 }
 .lead {
-  max-width: 36rem;
+  max-width: 34rem;
   margin: 0 0 var(--space-6);
-  color: rgba(255, 255, 255, 0.88);
   font-size: var(--fs-500);
 }
 .actions {
@@ -64,62 +78,72 @@
   flex-wrap: wrap;
   gap: var(--space-4);
 }
-/* Remove the neumorphic white highlight, which looks like a glow on navy */
-.actions > :first-child:not(:focus-visible) {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: var(--space-7) 0 0;
+}
+.fact {
+  min-width: 8.5rem;
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.fact dt {
+  order: 2;
+  color: var(--text-on-dark-muted);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.fact dd {
+  order: 1;
+  margin: 0;
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.fact {
+  display: flex;
+  flex-direction: column;
 }
 
-/* Network graphic: desktop and tablet only, so the mobile hero stays short. */
 .visual {
   display: none;
 }
 
-@media (min-width: 900px) {
+.scroll {
+  position: absolute;
+  bottom: 1.75rem;
+  left: 50%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-left: -1.25rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  color: var(--white);
+  animation: bob 2.2s ease-in-out infinite;
+}
+@keyframes bob {
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@media (min-width: 960px) {
   .inner {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   }
   .visual {
     display: block;
-    opacity: 0.9;
   }
-  /* Live wallpaper: two soft glows drifting slowly behind the content */
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  will-change: transform;
-}
-.orbRed {
-  top: -10rem;
-  right: -8rem;
-  width: 32rem;
-  height: 32rem;
-  background: radial-gradient(circle, rgba(214, 40, 57, 0.32), transparent 65%);
-  animation: drift-red 18s ease-in-out infinite alternate;
-}
-.orbBlue {
-  bottom: -14rem;
-  left: -10rem;
-  width: 36rem;
-  height: 36rem;
-  background: radial-gradient(circle, rgba(74, 108, 214, 0.35), transparent 65%);
-  animation: drift-blue 22s ease-in-out infinite alternate;
-}
-
-@keyframes drift-red {
-  to {
-    transform: translate(-4rem, 5rem) scale(1.15);
-  }
-}
-@keyframes drift-blue {
-  to {
-    transform: translate(6rem, -4rem) scale(1.1);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .orb {
-    animation: none;
-  }
-}
 }

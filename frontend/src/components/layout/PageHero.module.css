@@ -1,54 +1,88 @@
 .hero {
   position: relative;
   overflow: clip;
-  padding-block: clamp(2.5rem, 7vw, 5rem) var(--space-6);
+  padding-block: clamp(8rem, 16vw, 11.5rem) clamp(4rem, 9vw, 6.5rem);
+  background: var(--gradient-navy-deep);
+  border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+  color: var(--text-on-dark-muted);
 }
-.shape {
+.glow {
   position: absolute;
-  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    520px circle at var(--mx, 50%) var(--my, 30%),
+    rgba(255, 255, 255, 0.09),
+    transparent 60%
+  );
+}
+.orbRed {
+  top: -12rem;
+  right: -6rem;
+  width: 28rem;
+  height: 28rem;
+}
+.orbBlue {
+  bottom: -16rem;
+  left: -8rem;
+  width: 32rem;
+  height: 32rem;
+}
+.ring {
+  position: absolute;
+  top: 50%;
+  right: -14rem;
+  width: 34rem;
+  height: 34rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
+  transform: translateY(-50%);
   pointer-events: none;
 }
-.shapeNavy {
-  top: -8rem;
-  left: -7rem;
-  width: 20rem;
-  height: 20rem;
-  background: radial-gradient(circle at 35% 35%, rgba(11, 31, 92, 0.1), transparent 70%);
-}
-.shapeRed {
-  top: -3rem;
-  right: -5rem;
-  width: 15rem;
-  height: 15rem;
-  background: radial-gradient(circle at 40% 40%, rgba(214, 40, 57, 0.12), transparent 70%);
+.ringTwo {
+  right: -9rem;
+  width: 24rem;
+  height: 24rem;
+  border-color: rgba(238, 59, 77, 0.25);
 }
 .content {
   position: relative;
   z-index: 1;
-  max-width: 52rem;
+  max-width: 54rem;
   margin-inline: auto;
   text-align: center;
 }
 .eyebrow {
-  display: inline-block;
-  margin: 0 0 var(--space-4);
-  padding: var(--space-1) var(--space-4);
-  border: 1px solid #f3c6cb;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-5);
+  padding: 0.35rem var(--space-4);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-pill);
-  background: var(--tint-red);
-  color: var(--red-700);
-  font-size: var(--fs-300);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--white);
+  font-size: 0.8125rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
+.eyebrowDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #ff5468;
+  box-shadow: 0 0 10px #ff5468;
+}
 .title {
-  margin: 0 0 var(--space-4);
+  margin: 0 0 var(--space-5);
+  color: var(--white);
   font-size: var(--fs-800);
 }
 .lead {
-  max-width: 40rem;
+  max-width: 42rem;
   margin: 0 auto;
   font-size: var(--fs-500);
 }

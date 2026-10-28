@@ -1,0 +1,49 @@
+.section {
+  padding-block: clamp(2.5rem, 6vw, var(--space-7));
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.7rem var(--space-5);
+  border: 1px solid var(--border-fine);
+  border-radius: var(--radius-pill);
+  background: var(--gradient-raised);
+  box-shadow: var(--shadow-raised-sm);
+  color: var(--navy-800);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    background var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out);
+}
+.chip svg {
+  color: var(--red-600);
+  transition: color var(--duration-base) var(--ease-out);
+}
+.chip:hover {
+  transform: translateY(-3px);
+  border-color: var(--navy-800);
+  background: var(--navy-800);
+  color: var(--white);
+}
+.chip:hover svg {
+  color: #ff8a95;
+}
+.more {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-6);
+}

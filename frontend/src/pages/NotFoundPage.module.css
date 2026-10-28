@@ -1,0 +1,43 @@
+.page {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 80vh;
+  padding-block: 9rem 5rem;
+  overflow: clip;
+  border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+  background: var(--gradient-navy-deep);
+  color: var(--text-on-dark-muted);
+  text-align: center;
+}
+.orb {
+  top: -10rem;
+  right: -6rem;
+  width: 30rem;
+  height: 30rem;
+}
+.content {
+  position: relative;
+  z-index: 1;
+}
+.code {
+  margin: 0;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 24vw, 14rem);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+.title {
+  margin: 0 0 var(--space-3);
+  color: var(--white);
+  font-size: var(--fs-700);
+}
+.text {
+  margin-bottom: var(--space-6);
+}

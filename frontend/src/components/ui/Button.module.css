@@ -1,4 +1,5 @@
 .button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -11,23 +12,44 @@
   letter-spacing: 0.01em;
   text-decoration: none;
   cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
   transition:
-    transform var(--duration-fast) var(--ease-out),
+    transform var(--duration-base) var(--ease-out),
     box-shadow var(--duration-base) var(--ease-out),
-    background-color var(--duration-base) var(--ease-out);
+    background-color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out);
 }
 .small {
   min-height: 2.5rem;
   padding: var(--space-2) var(--space-5);
   font-size: var(--fs-300);
 }
+.large {
+  min-height: 3.5rem;
+  padding: var(--space-4) var(--space-7);
+  font-size: var(--fs-500);
+}
+
+/* Shine sweep on hover */
+.button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 700ms var(--ease-out);
+}
+.button:hover:not(:disabled)::after {
+  transform: translateX(120%);
+}
+
 .primary {
   background: var(--gradient-red);
   border-color: var(--red-700);
   color: var(--white);
-  box-shadow:
-    4px 6px 14px rgba(184, 31, 47, 0.3),
-    -3px -3px 8px var(--shadow-light);
+  box-shadow: var(--shadow-red);
 }
 .secondary {
   background: var(--gradient-raised);
@@ -39,20 +61,39 @@
   background: var(--white);
   border-color: var(--white);
   color: var(--navy-800);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.4);
 }
+.ghost {
+  background: var(--glass-bg);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--white);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.ghost:hover:not(:disabled) {
+  background: var(--glass-bg-strong);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
 .button:hover:not(:disabled) {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+}
+.primary:hover:not(:disabled) {
+  box-shadow: 0 18px 34px -10px rgba(214, 40, 57, 0.65);
 }
 .button:active:not(:disabled) {
   transform: translateY(0);
 }
-.primary:active:not(:disabled),
 .secondary:active:not(:disabled) {
   box-shadow: var(--shadow-inset);
 }
 .button:focus-visible {
   box-shadow: var(--focus-ring);
+}
+.ghost:focus-visible,
+.light:focus-visible,
+.primary:focus-visible {
+  box-shadow: var(--focus-ring-dark);
 }
 .button:disabled {
   opacity: 0.65;

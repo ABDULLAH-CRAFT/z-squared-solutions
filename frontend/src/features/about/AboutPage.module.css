@@ -1,22 +1,59 @@
-.accent {
-  color: var(--red-600);
-}
 .facts {
   display: grid;
   gap: var(--space-5);
 }
-.fact {
-  padding: clamp(1.25rem, 3vw, 2rem);
-  border-radius: var(--radius-xl);
-  border-left: 4px solid var(--red-600);
+.fact,
+.factDark {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  overflow: hidden;
+  border-radius: var(--radius-2xl);
 }
-.fact p {
+.factDark {
+  background: var(--gradient-navy);
+  box-shadow: var(--shadow-lift);
+  color: var(--text-on-dark-muted);
+}
+.factGlow {
+  top: -9rem;
+  right: -6rem;
+  width: 20rem;
+  height: 20rem;
+}
+.fact p,
+.factDark p {
+  position: relative;
   margin: 0;
 }
+.factIcon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: var(--glass-bg-strong);
+  color: var(--white);
+}
+.factIconRed {
+  border: 0;
+  background: var(--gradient-red);
+  box-shadow: var(--shadow-red);
+}
 .factTitle {
+  position: relative;
+  margin: var(--space-2) 0 0;
+  color: var(--white);
   font-size: var(--fs-600);
 }
-@media (min-width: 700px) {
+.factTitleDark {
+  color: var(--text-heading);
+}
+@media (min-width: 800px) {
   .facts {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

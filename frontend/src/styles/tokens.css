@@ -1,21 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap');
+
 /*
- * Design tokens. See docs/DESIGN_SPEC.md.
+ * Design tokens.
  * Breakpoints (use literal values in @media): sm 480px, md 768px, lg 1024px, xl 1440px.
+ * Fonts: Sora (headings) and Plus Jakarta Sans (body) load from Google Fonts with system fallbacks.
+ * Remove the @import line above to go back to system fonts only.
  */
 :root {
   /* Brand */
+  --navy-950: #040b2a;
   --navy-900: #081746;
   --navy-800: #0b1f5c;
+  --navy-700: #16307f;
   --navy-600: #31457f;
+  --navy-400: #5c70a8;
   --navy-300: #8a97bd;
+  --navy-200: #c3cbe3;
+  --red-500: #ee3b4d;
   --red-600: #d62839; /* 4.98:1 on white: safe for text and white-on-red buttons */
   --red-700: #b81f2f;
+  --blue-glow: #4a6cd6;
   --white: #ffffff;
 
-  /* Surfaces (predominantly white, with a faint cool tint for neumorphic depth) */
+  /* Surfaces */
   --surface-page: #ffffff;
   --surface-raised: #f6f8fd;
   --surface-sunken: #eef1f9;
+  --surface-tint: #f3f6fc;
   --border-fine: #dbe1f0;
   --border-strong: var(--navy-800);
 
@@ -23,18 +34,25 @@
   --text-heading: var(--navy-800);
   --text-body: var(--navy-600);
   --text-on-dark: var(--white);
+  --text-on-dark-muted: rgba(255, 255, 255, 0.78);
+  --text-on-dark-soft: rgba(255, 255, 255, 0.62);
 
-  /* Typography (system stacks: no font downloads, no layout shift) */
-  --font-display: 'Segoe UI Variable Display', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
-  --font-body: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  /* Glass (for use on navy backgrounds) */
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg-strong: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.16);
+
+  /* Typography */
+  --font-display: 'Sora', 'Segoe UI Variable Display', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
   --fs-300: 0.875rem;
   --fs-400: 1rem;
   --fs-500: 1.125rem;
   --fs-600: 1.375rem;
-  --fs-700: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem);
-  --fs-800: clamp(2.5rem, 1.3rem + 4.8vw, 5rem);
-  --lh-tight: 1.1;
-  --lh-body: 1.65;
+  --fs-700: clamp(1.75rem, 1.2rem + 1.9vw, 2.75rem);
+  --fs-800: clamp(2.4rem, 1.2rem + 4.6vw, 4.75rem);
+  --lh-tight: 1.08;
+  --lh-body: 1.7;
 
   /* Spacing (4px base) */
   --space-1: 0.25rem;
@@ -45,34 +63,46 @@
   --space-6: 2rem;
   --space-7: 3rem;
   --space-8: 5rem;
+  --space-9: 7rem;
 
   /* Radii */
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 22px;
   --radius-xl: 30px;
+  --radius-2xl: 40px;
   --radius-pill: 999px;
 
   /* Neumorphic shadows: soft dark plus light highlight pair */
   --shadow-dark: rgba(11, 31, 92, 0.14);
   --shadow-light: rgba(255, 255, 255, 0.95);
-  --shadow-raised: 6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
+  --shadow-raised: 8px 8px 20px var(--shadow-dark), -8px -8px 20px var(--shadow-light);
   --shadow-raised-sm: 3px 3px 8px var(--shadow-dark), -3px -3px 8px var(--shadow-light);
   --shadow-inset: inset 3px 3px 7px var(--shadow-dark), inset -3px -3px 7px var(--shadow-light);
+  --shadow-lift: 0 22px 44px -16px rgba(11, 31, 92, 0.35);
+  --shadow-red: 0 14px 30px -10px rgba(214, 40, 57, 0.55);
+
+  /* Gradients */
   --gradient-navy: linear-gradient(150deg, #13307f 0%, var(--navy-800) 45%, var(--navy-900) 100%);
-  --gradient-red: linear-gradient(145deg, #e03244, var(--red-600) 60%, var(--red-700));
-  --tint-red: #fdecee;
+  --gradient-navy-deep: linear-gradient(160deg, var(--navy-900) 0%, var(--navy-950) 100%);
+  --gradient-red: linear-gradient(145deg, #e8374a, var(--red-600) 55%, var(--red-700));
+  --gradient-text: linear-gradient(100deg, #ff9aa5 0%, #ff5468 45%, #ff8a6b 100%);
   --gradient-raised: linear-gradient(145deg, #ffffff, var(--surface-raised));
+  --tint-red: #fdecee;
 
   /* Focus */
   --focus-ring: 0 0 0 3px #ffffff, 0 0 0 5px var(--navy-800);
+  --focus-ring-dark: 0 0 0 3px var(--navy-900), 0 0 0 5px var(--white);
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --duration-fast: 150ms;
   --duration-base: 250ms;
+  --duration-slow: 700ms;
 
   /* Layout */
   --container-max: 1200px;
   --container-pad: clamp(1rem, 4vw, 2rem);
+  --header-h: 4.5rem;
 }

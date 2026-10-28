@@ -1,6 +1,7 @@
 import { ArrowRight, type LucideIcon } from 'lucide-react'
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
+import { trackPointer } from '@/lib/pointer'
 import styles from './ServiceTile.module.css'
 
 interface ServiceTileProps {
@@ -10,16 +11,31 @@ interface ServiceTileProps {
   to?: string
   /** Spans the full row of the grid. */
   wide?: boolean
+  index?: number
   children: ReactNode
 }
 
-/** A flat, clean service tile for the services grid. Render inside a <ul>. */
-export function ServiceTile({ icon: Icon, title, to = '/contact', wide = false, children }: ServiceTileProps) {
-  const classes = [styles.tile, wide ? styles.wide : undefined].filter(Boolean).join(' ')
+/** A service tile with a cursor spotlight. Render inside a <ul>. */
+export function ServiceTile({
+  icon: Icon,
+  title,
+  to = '/contact',
+  wide = false,
+  index = 0,
+  children,
+}: ServiceTileProps) {
+  const classes = ['nm-raised', 'spotlight', styles.tile, wide ? styles.wide : undefined]
+    .filter(Boolean)
+    .join(' ')
   return (
-    <li className={classes}>
+    <li
+      className={classes}
+      data-reveal
+      style={{ '--reveal-delay': `${(index % 3) * 100}ms` } as CSSProperties}
+      onPointerMove={trackPointer}
+    >
       <span className={styles.icon} aria-hidden="true">
-        <Icon size={22} />
+        <Icon size={24} />
       </span>
       <h3 className={styles.title}>{title}</h3>
       <div className={styles.body}>{children}</div>

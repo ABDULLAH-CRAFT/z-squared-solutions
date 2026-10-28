@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { buttonClasses } from './buttonClasses'
 import styles from './CtaBand.module.css'
@@ -7,8 +8,6 @@ interface CtaBandProps {
   text: string
   buttonLabel?: string
   to?: string
-  /** Red is the default so the band stands out from the navy and white sections around it. */
-  variant?: 'red' | 'navy'
 }
 
 /** Closing call to action: a short message and one clear action. */
@@ -17,21 +16,23 @@ export function CtaBand({
   text,
   buttonLabel = "Let's Connect",
   to = '/contact',
-  variant = 'red',
 }: CtaBandProps) {
-  const classes = [styles.band, variant === 'navy' ? styles.navy : styles.red].join(' ')
   return (
-    <section className={classes} aria-labelledby="cta-heading">
-      <div className={styles.glow} aria-hidden="true" />
-      <div className={styles.copy}>
+    <section className={styles.band} aria-labelledby="cta-heading" data-reveal="scale">
+      <div className="bg-grid" aria-hidden="true" />
+      <div className={`orb orb-red ${styles.orbRed}`} aria-hidden="true" />
+      <div className={`orb orb-blue ${styles.orbBlue}`} aria-hidden="true" />
+
+      <div className={styles.content}>
         <h2 id="cta-heading" className={styles.title}>
           {title}
         </h2>
         <p className={styles.text}>{text}</p>
+        <Link to={to} className={buttonClasses('primary', 'lg', styles.button)}>
+          {buttonLabel}
+          <ArrowRight size={20} aria-hidden="true" />
+        </Link>
       </div>
-      <Link to={to} className={buttonClasses('light', 'md', styles.button)}>
-        {buttonLabel}
-      </Link>
     </section>
   )
 }

@@ -1,3 +1,5 @@
+import styles from './PipelineGraphic.module.css'
+
 const COLUMNS = [
   { x: 50, count: 7 },
   { x: 160, count: 4 },
@@ -20,13 +22,20 @@ const grid = COLUMNS.map((column) => ({ x: column.x, ys: ys(column.count) }))
 
 /** Decorative outreach-pipeline motif: many prospects narrowing to a qualified conversation. */
 export function PipelineGraphic() {
-  const lines: Array<{ key: string; x1: number; y1: number; x2: number; y2: number }> = []
+  const lines: Array<{ key: string; x1: number; y1: number; x2: number; y2: number; delay: number }> = []
   grid.forEach((column, c) => {
     const next = grid[c + 1]
     if (!next) return
     column.ys.forEach((y, i) => {
       const target = Math.min(next.ys.length - 1, Math.floor((i * next.ys.length) / column.ys.length))
-      lines.push({ key: `${c}-${i}`, x1: column.x, y1: y, x2: next.x, y2: next.ys[target] ?? MID })
+      lines.push({
+        key: `${c}-${i}`,
+        x1: column.x,
+        y1: y,
+        x2: next.x,
+        y2: next.ys[target] ?? MID,
+        delay: c * 0.5 + i * 0.12,
+      })
     })
   })
 
@@ -38,16 +47,26 @@ export function PipelineGraphic() {
       focusable="false"
       role="presentation"
     >
-      <g stroke="rgba(255,255,255,0.22)" strokeWidth="1.2">
+      <g strokeWidth="1.4" fill="none">
         {lines.map((line) => (
-          <line key={line.key} x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2} />
+          <line
+            key={line.key}
+            className={styles.flow}
+            style={{ animationDelay: `${line.delay}s` }}
+            x1={line.x1}
+            y1={line.y1}
+            x2={line.x2}
+            y2={line.y2}
+          />
         ))}
       </g>
       <g fill="#ffffff">
         {grid.slice(0, 3).map((column, c) =>
-          column.ys.map((y) => (
+          column.ys.map((y, i) => (
             <circle
               key={`${c}-${y}`}
+              className={styles.dot}
+              style={{ animationDelay: `${c * 0.4 + i * 0.15}s` }}
               cx={column.x}
               cy={y}
               r={c === 0 ? 5 : c === 1 ? 6.5 : 8}
@@ -56,8 +75,8 @@ export function PipelineGraphic() {
           )),
         )}
       </g>
-      <circle cx={360} cy={MID} r="24" fill="rgba(214,40,57,0.25)" />
-      <circle cx={360} cy={MID} r="12" fill="#d62839" />
+      <circle className={styles.pulse} cx={360} cy={MID} r="24" fill="rgba(238,59,77,0.35)" />
+      <circle cx={360} cy={MID} r="12" fill="#ff5468" />
     </svg>
   )
 }

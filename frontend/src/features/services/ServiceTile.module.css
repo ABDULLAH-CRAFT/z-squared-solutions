@@ -2,16 +2,34 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  padding: var(--space-5);
-  border: 1px solid var(--border-fine);
-  border-top: 3px solid var(--red-600);
-  border-radius: var(--radius-lg);
-  background: var(--white);
-  transition: border-color var(--duration-base) var(--ease-out);
+  padding: var(--space-6) var(--space-5);
+  border-radius: var(--radius-xl);
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    opacity var(--duration-slow) var(--ease-out);
+}
+.tile::after {
+  content: '';
+  position: absolute;
+  left: var(--space-5);
+  right: var(--space-5);
+  bottom: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--gradient-red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-slow) var(--ease-out);
 }
 .tile:hover {
-  border-color: var(--navy-300);
-  border-top-color: var(--red-600);
+  transform: translateY(-6px);
+  border-color: #f3c6cb;
+  box-shadow: var(--shadow-raised), var(--shadow-lift);
+}
+.tile:hover::after {
+  transform: scaleX(1);
 }
 .wide {
   grid-column: 1 / -1;
@@ -19,12 +37,22 @@
 .icon {
   display: grid;
   place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 3.25rem;
+  height: 3.25rem;
   border: 1px solid #f3c6cb;
-  border-radius: 50%;
+  border-radius: var(--radius-md);
   background: var(--tint-red);
+  box-shadow: var(--shadow-raised-sm);
   color: var(--red-600);
+  transition:
+    transform var(--duration-base) var(--ease-spring),
+    background-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out);
+}
+.tile:hover .icon {
+  transform: rotate(-6deg) scale(1.08);
+  background: var(--gradient-red);
+  color: var(--white);
 }
 .title {
   margin: 0;
@@ -45,9 +73,12 @@
   gap: var(--space-2);
   margin-top: var(--space-2);
   color: var(--red-700);
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
 }
-.link:hover {
-  text-decoration: underline;
+.link svg {
+  transition: transform var(--duration-base) var(--ease-out);
+}
+.tile:hover .link svg {
+  transform: translateX(5px);
 }

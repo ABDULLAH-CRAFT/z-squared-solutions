@@ -1,0 +1,16 @@
+.track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  height: 3px;
+  pointer-events: none;
+}
+.bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--red-600), #ff8a6b);
+  box-shadow: 0 0 12px rgba(238, 59, 77, 0.7);
+  transform: scaleX(0);
+  transform-origin: left center;
+}

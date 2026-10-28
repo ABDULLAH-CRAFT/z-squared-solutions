@@ -1,42 +1,11 @@
-import { Handshake, Lightbulb, RefreshCw, Search, Send, UserCheck } from 'lucide-react'
+import type { CSSProperties } from 'react'
 import { PageHero } from '@/components/layout/PageHero'
 import { Section } from '@/components/layout/Section'
 import { CtaBand } from '@/components/ui/CtaBand'
+import { approachSteps } from '@/features/approach/steps'
 import { usePageTitle } from '@/hooks/usePageTitle'
+import { trackPointer } from '@/lib/pointer'
 import styles from '@/features/approach/ApproachPage.module.css'
-
-const steps = [
-  {
-    name: 'Understand',
-    text: 'We learn your services, ideal customers, target geography and goals.',
-    Icon: Lightbulb,
-  },
-  {
-    name: 'Research',
-    text: 'We identify target companies and the decision makers within them.',
-    Icon: Search,
-  },
-  {
-    name: 'Engage',
-    text: 'We start targeted outreach through the channels we agree with you.',
-    Icon: Send,
-  },
-  {
-    name: 'Qualify',
-    text: 'We evaluate responses and assess how well each prospect fits.',
-    Icon: UserCheck,
-  },
-  {
-    name: 'Connect',
-    text: 'We coordinate qualified sales conversations and appointments for your team.',
-    Icon: Handshake,
-  },
-  {
-    name: 'Improve',
-    text: 'We review feedback, measure the indicators we agreed and refine the approach.',
-    Icon: RefreshCw,
-  },
-] as const
 
 export function ApproachPage() {
   usePageTitle('Our Approach')
@@ -47,7 +16,7 @@ export function ApproachPage() {
         eyebrow="Our Approach"
         title={
           <>
-            Six steps from <span className={styles.accent}>strategy to conversation.</span>
+            Six steps from <span className="gradient-text">strategy to conversation.</span>
           </>
         }
         lead="A clear, repeatable process that keeps research first and keeps you informed at every stage."
@@ -55,14 +24,25 @@ export function ApproachPage() {
 
       <Section>
         <ol className={styles.timeline} aria-label="Our six-step approach">
-          {steps.map(({ name, text, Icon }, index) => (
-            <li key={name} className={styles.step}>
-              <div className={styles.node} aria-hidden="true">
+          {approachSteps.map(({ name, text, Icon }, index) => (
+            <li
+              key={name}
+              className={`${styles.step} ${index % 2 === 1 ? styles.right : ''}`}
+            >
+              <div className={styles.node} aria-hidden="true" data-reveal="scale">
                 <span className={styles.stepNumber}>{index + 1}</span>
               </div>
-              <div className={`nm-raised ${styles.card}`}>
+              <div
+                className={`nm-raised spotlight ${styles.card}`}
+                data-reveal={index % 2 === 1 ? 'right' : 'left'}
+                style={{ '--reveal-delay': '80ms' } as CSSProperties}
+                onPointerMove={trackPointer}
+              >
+                <span className={styles.bigNumber} aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
                 <span className={styles.stepIcon} aria-hidden="true">
-                  <Icon size={20} />
+                  <Icon size={22} />
                 </span>
                 <h2 className={styles.stepTitle}>
                   <span className="visually-hidden">Step {index + 1}: </span>
